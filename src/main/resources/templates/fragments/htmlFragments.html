@@ -111,6 +111,7 @@
                             </script>
                         </ul>
                     </li>
+                    <li><a href="/events" sec:authorize="hasAnyAuthority('OWNER', 'ADMIN', 'MENTOR','HR')">Лента событий</a></li>
 
                     <li th:if="${#httpServletRequest.getRequestURI() == '/client'}">
                         <div class="search-place">

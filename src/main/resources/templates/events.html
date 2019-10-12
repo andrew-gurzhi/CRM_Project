@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ЛЕНТА СОБЫТИЙ</title>
+    <meta charset="UTF-8" />
+    <div th:replace="fragments/htmlFragments::header"></div>
+    <link rel="stylesheet" href="/css/style.css" />
+    <div th:replace="fragments/htmlFragments::custom-style"></div>
+    <script type="text/javascript" th:src="@{/js/boards.js}"></script>
+</head>
+
+<body>
+<!--modalwindow-->
+
+<div style="margin: 2%">
+    <div th:replace="fragments/htmlFragments::top-navigation-panel"></div>
+
+    <div class="container-fluid">
+        <div><h1>Лента событий</h1></div>
+        <select>
+            <option>Изменения статусов</option>
+            <option>Создание студентов</option>
+            <option>Измение клиентов</option>
+            <option>Кукушкина</option>
+        </select>
+        <div class="row">
+            <div class="col-md-1">
+                <div style="float: right;" id="loaderImage"></div>
+            </div>
+            <div class="col-md-4"><input class="form-control clearable" id="searchInput"
+                                         placeholder="Поиск координатора ..." />
+            </div>
+            <div class="col-md-4"><button type="button" class="btn btn-primary "
+                                          sec:authorize="hasAnyAuthority('ADMIN', 'OWNER')"
+                                          data-toggle="modal" data-target="#routes-modal-window">
+                Установить % распределения заявок
+            </button>
+            </div>
+
+        </div>
+
+        <table class="table table-hover table-fixed" id="clients-table">
+            <thead id="thead-table-clients">
+            <tr class="head-table">
+                <th>#</th>
+                <th>Cобытие</th>
+                <th>Дата</th>
+            </tr>
+            </thead>
+
+            <tbody id="table-body">
+            <tr th:each="event : ${events}">
+                <td th:text="${event.id}"></td>
+                <td th:text="${event.name}"></td>
+                <td th:text="${event.date}"></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/events.js}"></script>
+</body>
+</html>
