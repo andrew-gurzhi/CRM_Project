@@ -7,6 +7,7 @@ import com.ewp.crm.models.StudentStatus;
 import com.ewp.crm.models.dto.all_students_page.StudentDto;
 import com.ewp.crm.repository.interfaces.StudentRepository;
 import com.ewp.crm.repository.interfaces.StudentRepositoryCustom;
+import com.ewp.crm.service.interfaces.EventService;
 import com.ewp.crm.service.interfaces.ProjectPropertiesService;
 import com.ewp.crm.service.interfaces.StudentService;
 import org.slf4j.Logger;
@@ -26,16 +27,18 @@ public class StudentServiceImpl extends CommonServiceImpl<Student> implements St
     private final StudentRepository studentRepository;
     private final StudentRepositoryCustom studentRepositoryCustom;
     private final ProjectPropertiesService projectPropertiesService;
-
+    private final EventService eventService;
     private static Logger logger = LoggerFactory.getLogger(StudentServiceImpl.class);
 
     @Autowired
     public StudentServiceImpl(StudentRepository studentRepository,
                               StudentRepositoryCustom studentRepositoryCustom,
+                              EventService eventService,
                               ProjectPropertiesService projectPropertiesService) {
         this.studentRepository = studentRepository;
         this.studentRepositoryCustom = studentRepositoryCustom;
         this.projectPropertiesService = projectPropertiesService;
+        this.eventService = eventService;
     }
 
     @Override

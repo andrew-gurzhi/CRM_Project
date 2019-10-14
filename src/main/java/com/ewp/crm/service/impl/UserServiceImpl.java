@@ -3,18 +3,12 @@ package com.ewp.crm.service.impl;
 import com.ewp.crm.configs.ImageConfig;
 import com.ewp.crm.exceptions.user.UserExistsException;
 import com.ewp.crm.exceptions.user.UserPhotoException;
-import com.ewp.crm.models.Role;
-import com.ewp.crm.models.Status;
-import com.ewp.crm.models.User;
-import com.ewp.crm.models.UserRoutes;
+import com.ewp.crm.models.*;
 import com.ewp.crm.models.dto.MentorDtoForMentorsPage;
 import com.ewp.crm.models.dto.UserDtoForBoard;
 import com.ewp.crm.models.dto.UserRoutesDto;
 import com.ewp.crm.repository.interfaces.UserDAO;
-import com.ewp.crm.service.interfaces.RoleService;
-import com.ewp.crm.service.interfaces.UserRoutesService;
-import com.ewp.crm.service.interfaces.UserService;
-import com.ewp.crm.service.interfaces.UserStatusService;
+import com.ewp.crm.service.interfaces.*;
 import com.ewp.crm.util.validators.PhoneValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +41,7 @@ public class UserServiceImpl extends CommonServiceImpl<User> implements UserServ
     private final RoleService roleService;
     private final UserRoutesService userRoutesService;
     private final UserStatusService userStatusService;
+    private final EventService eventService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -54,7 +49,7 @@ public class UserServiceImpl extends CommonServiceImpl<User> implements UserServ
     @Autowired
     public UserServiceImpl(UserDAO userDAO, ImageConfig imageConfig, PhoneValidator phoneValidator,
                            Environment env, EntityManager entityManager, RoleService roleService,
-                           UserRoutesService userRoutesService, UserStatusService userStatusService) {
+                           UserRoutesService userRoutesService, UserStatusService userStatusService,EventService eventService) {
         this.userDAO = userDAO;
         this.imageConfig = imageConfig;
         this.phoneValidator = phoneValidator;
@@ -63,6 +58,7 @@ public class UserServiceImpl extends CommonServiceImpl<User> implements UserServ
         this.roleService = roleService;
         this.userRoutesService = userRoutesService;
         this.userStatusService = userStatusService;
+        this.eventService = eventService;
     }
 
     @Override
@@ -87,6 +83,10 @@ public class UserServiceImpl extends CommonServiceImpl<User> implements UserServ
 
         logger.info("{}: user saved successfully", UserServiceImpl.class.getName());
         User addUser = userDAO.saveAndFlush(user);
+        Event event = new Event();
+        event.setName("Был успешно добавлен пользователь" + user.getFullName());
+        eventService.add(event);
+
         if (addUser != null) {
             userStatusService.addUserForAllStatuses(addUser.getId());
         }

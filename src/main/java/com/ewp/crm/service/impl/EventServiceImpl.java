@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EventServiceImpl implements EventService {
+public class EventServiceImpl extends CommonServiceImpl<Event> implements EventService {
+
 private final EventRepository eventRepository;
 
 	@Autowired

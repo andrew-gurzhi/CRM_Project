@@ -16,29 +16,31 @@
     <div th:replace="fragments/htmlFragments::top-navigation-panel"></div>
 
     <div class="container-fluid">
-        <div><h1>Лента событий</h1></div>
-        <select>
-            <option>Изменения статусов</option>
-            <option>Создание студентов</option>
-            <option>Изменение клиентов</option>
-            <option>Добавление сотрудников</option>
-            <option>Изменение сотрудников</option>
-        </select>
-        <div class="row">
-            <div class="col-md-1">
-                <div style="float: right;" id="loaderImage"></div>
-            </div>
-            <div class="col-md-4"><input class="form-control clearable" id="searchInput"
-                                         placeholder="Поиск координатора ..." />
-            </div>
-            <div class="col-md-4"><button type="button" class="btn btn-primary "
-                                          sec:authorize="hasAnyAuthority('ADMIN', 'OWNER')"
-                                          data-toggle="modal" data-target="#routes-modal-window">
-                Установить % распределения заявок
-            </button>
-            </div>
 
-        </div>
+        <div><h1>Лента событий</h1></div>
+        Выберите тип события
+        <select name = "kindofevent" >
+            <option value="changestatus">Изменения статусов </option>
+            <option value="createstudent">Создание студентов</option>
+            <option value="changeclients">Изменение клиентов</option>
+            <option value="addusers">Добавление сотрудников</option>
+            <option value="changeusers">Изменение сотрудников</option>
+        </select>
+<!--        <div class="row">-->
+<!--            <div class="col-md-1">-->
+<!--                <div style="float: right;" id="loaderImage"></div>-->
+<!--            </div>-->
+<!--            <div class="col-md-4"><input class="form-control clearable" id="searchInput"-->
+<!--                                         placeholder="Поиск координатора ..." />-->
+<!--            </div>-->
+<!--            <div class="col-md-4"><button type="button" class="btn btn-primary "-->
+<!--                                          sec:authorize="hasAnyAuthority('ADMIN', 'OWNER')"-->
+<!--                                          data-toggle="modal" data-target="#routes-modal-window">-->
+<!--                Установить % распределения заявок-->
+<!--            </button>-->
+<!--            </div>-->
+
+<!--        </div>-->
 
         <table class="table table-hover table-fixed" id="clients-table">
             <thead id="thead-table-clients">
