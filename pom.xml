@@ -42,7 +42,7 @@
 		<logback.version>1.2.3</logback.version>
 		<fasterxml.jackson.version>2.9.6</fasterxml.jackson.version>
 		<jadira.usertype.version>6.0.1.GA</jadira.usertype.version>
-		<poi.version>4.1.0</poi.version>
+		<poi.version>4.1.1</poi.version>
 		<poi-ooxml.version>4.1.0</poi-ooxml.version>
 		<commons-csv.version>1.7</commons-csv.version>
 		<junit-platform.version>5.3.2</junit-platform.version>
